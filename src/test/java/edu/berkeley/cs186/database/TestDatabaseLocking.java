@@ -154,6 +154,7 @@ public class TestDatabaseLocking {
                          "acquire 2 database/table-testTable1/3 S",
                          "acquire 2 database/table-testTable1/4 S"
                      ), lockManager.log);
+        t1.end();
     }
 
     @Test
@@ -170,6 +171,7 @@ public class TestDatabaseLocking {
                          "acquire 2 database IX",
                          "acquire 2 database/table-testTable1 X"
                      ), lockManager.log.subList(0, 2));
+        t1.end();
     }
 
     @Test
@@ -208,6 +210,7 @@ public class TestDatabaseLocking {
                          "acquire 3 database/table-testTable1 IX",
                          "acquire 3 database/table-testTable1/4 X"
                      ), lockManager.log);
+        t1.end();
     }
 
     @Test
@@ -227,6 +230,7 @@ public class TestDatabaseLocking {
                          "acquire 2 database/table-testTable1 IX",
                          "acquire 2 database/table-testTable1/4 X"
                      ), lockManager.log);
+        t1.end();
     }
 
     @Test
@@ -244,6 +248,7 @@ public class TestDatabaseLocking {
                          "acquire 2 database/table-testTable1 IX",
                          "acquire 2 database/table-testTable1/4 X"
                      ), lockManager.log);
+        t1.end();
     }
 
     @Test
@@ -263,6 +268,7 @@ public class TestDatabaseLocking {
                          "acquire 2 database IS",
                          "acquire 2 database/table-testTable1 S"
                      ), lockManager.log);
+        t1.end();
     }
 
     @Test
@@ -282,6 +288,7 @@ public class TestDatabaseLocking {
                          "acquire 2 database IS",
                          "acquire 2 database/table-testTable1 S"
                      ), lockManager.log.subList(0, 2));
+        t1.end();
     }
 
     @Test
@@ -329,6 +336,8 @@ public class TestDatabaseLocking {
                              "acquire 1 database/table-testTable1 S"
                          ), lockManager.log);
         }
+        t1.end();
+        t2.end();
     }
 
     @Test
@@ -348,6 +357,8 @@ public class TestDatabaseLocking {
                          "acquire 1 database IS",
                          "acquire 1 database/index-testTable1,int2 S"
                      ), lockManager.log);
+        t1.end();
+        t2.end();
     }
 
     @Test
@@ -386,6 +397,7 @@ public class TestDatabaseLocking {
                          "acquire 1 database/table-testTable1 IS",
                          "acquire 1 database/table-testTable1/1 S"
                      ), lockManager.log);
+        t1.end();
     }
 
     @Test
@@ -398,6 +410,7 @@ public class TestDatabaseLocking {
         assertTrue(lockManager.log.contains("disable-children temp-" + tableName));
         assertTrue(LockType.substitutable(lockManager.orphanContext("temp-" + tableName).getLocalLockType(
                                               t0), LockType.S));
+        t0.end();
     }
 
     @Test
@@ -440,6 +453,7 @@ public class TestDatabaseLocking {
                          "release/t 2 database/table-testTable1/4",
                          "release/t 2 database/table-testTable1/8"
                      ), lockManager.log);
+        t0.end();
     }
 
     @Test
@@ -471,6 +485,7 @@ public class TestDatabaseLocking {
                          "release/t 2 database/table-testTable1/4",
                          "release/t 2 database/table-testTable1/8"
                      ), lockManager.log);
+        t0.end();
     }
 
     @Test
@@ -497,6 +512,7 @@ public class TestDatabaseLocking {
                          "acquire 2 database IX",
                          "acquire 2 database/table-testTable1 X"
                      ), lockManager.log);
+        t0.end();
     }
 
     @Test
@@ -509,5 +525,6 @@ public class TestDatabaseLocking {
         assertEquals(Arrays.asList(
                          "acquire 1 database X"
                      ), lockManager.log);
+        t0.end();
     }
 }
